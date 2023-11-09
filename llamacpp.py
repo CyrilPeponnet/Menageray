@@ -105,7 +105,10 @@ class LlamaCPPModel:
         self.llm.set_cache(cache)
 
     def complete(self, data):
-        body = CreateCompletionRequest(**data)
+        try:
+            body = CreateCompletionRequest(**data)
+        except Exception as ex:
+            return JSONResponse(f"unable to validate params: {ex}", status_code=500)
 
         # how model swapping if needed
         if body.model is not None and body.model != self.model:
@@ -145,7 +148,11 @@ class LlamaCPPModel:
         return self.llm(**kwargs)
 
     def chatcomplete(self, data):
-        body = CreateChatCompletionRequest(**data)
+        try:
+            body = CreateChatCompletionRequest(**data)
+        except Exception as ex:
+            return JSONResponse(f"unable to validate params: {ex}", status_code=500)
+
         exclude = {
             "n",
             "logit_bias",

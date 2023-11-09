@@ -19,7 +19,7 @@ conda install -c conda-forge pip
 pip install -r requirements.txt
 ```
 
-Now you can simply run `serve run menageray:entrypoint` 
+Now you can simply run `serve run menageray:entrypoint` (or deploy it see Ray documentation)
 
 This will expose the following API on http://localhost:8000
 
